@@ -1,0 +1,6 @@
+{
+	"translation": {
+		"invalidFormatChar": "invalid format char: {{v}}",
+		"invalidParam": "invalid param: {{v}}"
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"translation": {
+		"invalidFormatChar": "无效的~[格式符]{{v,hadesValue}}",
+		"invalidParam": "无效的~[参数]{{v,hadesValue}}"
+	}
+}
