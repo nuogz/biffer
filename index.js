@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { fstatSync, openSync, readFileSync, readSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -29,7 +29,7 @@ if(isOutputHades) {
 /**
  * #### Biffer
  * - An easy wrapper for NodeJS Buffer
- * @version 1.1.0-2022.02.04.01
+ * @version 1.2.0-2022.02.04.02
  * @class
  */
 class Biffer {
@@ -189,46 +189,67 @@ class Biffer {
 
 
 	/**
-	 * @type {Buffer}
+	 * Target buffer or target file descriptor
+	 * @type {Buffer|number}
 	 * */
-	#buffer;
+	#target;
+	get target() { return this.#target; }
 
 	/**
-	 * file path (if pass file path when construct)
+	 * File path (if pass file path when construct)
 	 * @type {String}
 	 * */
 	path;
 
 	/**
-	 * postion of used bytes
+	 * Postion of used bytes
 	 * @type {number}
 	 * */
 	#pos = 0;
+	get pos() { return this.#pos; }
 
 	/**
-	 * buffer's length
+	 * Buffer's length
 	 * @type {number}
 	 * */
-	length;
+	#length;
+	get length() { return this.#length; }
+
+	/**
+	 * use File Descriptor instead Buffer or not
+	 * @type {number}
+	 * */
+	#useFD = false;
+	get useFD() { return this.#useFD; }
 
 	/**
 	 * An easy wrapper for NodeJS Buffer
-	 * @param {Buffer|string} raw `buffer` or `file path`
+	 * @param {Buffer|string|number} raw `buffer` or `file path`
 	 */
 	constructor(raw) {
 		if(raw instanceof Buffer) {
-			this.#buffer = raw;
+			this.#target = raw;
+		}
+		else if(typeof raw == 'number') {
+			this.#target = raw;
+
+			this.#useFD = true;
 		}
 		else if(typeof raw == 'string') {
-			this.path = raw;
+			this.#target = openSync(raw);
 
-			this.#buffer = readFileSync(raw);
+			this.#useFD = true;
+
+			this.path = raw;
 		}
 		else {
 			throw TypeError(I18N.t('invalidParam', { v: raw }));
 		}
 
-		this.length = this.#buffer.length;
+
+		this.#length = this.useFD ?
+			fstatSync(raw).size :
+			this.#target.length;
 	}
 
 	/**
@@ -239,9 +260,16 @@ class Biffer {
 	 * @returns {Array<number|string>}
 	 */
 	unpack(format) {
-		const result = Biffer.unpack(format, this.#buffer, this.#pos);
+		const sizeData = Biffer.calc(format);
 
-		this.#pos += Biffer.calc(format);
+		let buffer = this.target;
+		if(this.useFD) {
+			readSync(this.target, buffer = Buffer.alloc(sizeData), 0, sizeData, this.pos);
+		}
+
+		const result = Biffer.unpack(format, buffer, this.useFD ? 0 : this.pos);
+
+		this.#pos += sizeData;
 
 		return result;
 	}
@@ -252,7 +280,7 @@ class Biffer {
 	 * @returns {number}
 	 */
 	tell() {
-		return this.#pos;
+		return this.pos;
 	}
 	/**
 	 * Set new position
@@ -283,7 +311,19 @@ class Biffer {
 	slice(size) {
 		if(typeof size != 'number') { throw TypeError(I18N.t('invalidParam', { v: size })); }
 
-		return this.#buffer.slice(this.#pos, this.#pos += size);
+		const end = this.pos + size;
+
+		const buffer = this.useFD ?
+			Buffer.alloc(size) :
+			this.target.slice(this.pos, end);
+
+		if(this.useFD) {
+			readSync(this.target, buffer, 0, size, this.pos);
+		}
+
+		this.#pos = end;
+
+		return buffer;
 	}
 	/**
 	 * Same for `.slice`, but wrap by new Biffer
@@ -295,20 +335,41 @@ class Biffer {
 	}
 
 	/**
-	 * Returns the position of the first occurrence of data in the buffer
+	 * Returns the position of the first occurrence on buffer data
 	 * @param {any} data data would pass to `Buffer.from`
 	 * @returns {number} offset
 	 */
 	find(data) {
-		const buffer = Buffer.from(data);
-		const offset = this.#buffer.indexOf(buffer, this.#pos);
+		const bufferData = Buffer.from(data);
 
-		if(offset > -1) {
-			this.#pos = offset;
+		let offset = -1;
 
+		if(this.useFD) {
+			const buffer = Buffer.alloc(1024 * 1024 + bufferData.length);
+			const lengthAll = this.length;
+			const lengthRead = buffer.length;
+			let pos = this.pos;
+
+			while(pos < lengthAll) {
+				readSync(this.target, buffer, 0, lengthRead, pos);
+
+				const offsetTemp = buffer.indexOf(bufferData);
+
+				if(offsetTemp > -1) {
+					offset = pos + offsetTemp - this.pos;
+
+					break;
+				}
+
+				pos += 1024 * 1024;
+			}
+		}
+		else {
+			offset = this.target.indexOf(bufferData, this.pos);
 		}
 
-		return offset;
+
+		return offset > -1 ? this.#pos = offset : offset;
 	}
 	/**
 	 * Seek to start then find data position
@@ -340,7 +401,7 @@ class Biffer {
 	 * @returns {boolean}
 	 */
 	isEnd() {
-		return this.#pos >= this.#buffer.length;
+		return this.pos >= this.length;
 	}
 }
 
