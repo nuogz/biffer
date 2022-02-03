@@ -29,7 +29,7 @@ if(isOutputHades) {
 /**
  * #### Biffer
  * - An easy wrapper for NodeJS Buffer
- * @version 1.0.0-2022.02.03.01
+ * @version 1.1.0-2022.02.04.01
  * @class
  */
 class Biffer {
@@ -161,7 +161,7 @@ class Biffer {
 		return result;
 	}
 
-	static #calc(format) {
+	static calc(format) {
 		const charList = format.match(/(^[<>])|\d*[a-zA-Z]/g);
 
 		const [, matchEndian] = Biffer.#parseEndian(charList);
@@ -235,14 +235,13 @@ class Biffer {
 	 * Unpack data according format string
 	 * - `<` small endian (ONLY at the first, default endian if not set)
 	 * - `>` big endian (ONLY at the first)
-	 * - `>` big endian (ONLY at the first)
 	 * @param {string} format
 	 * @returns {Array<number|string>}
 	 */
 	unpack(format) {
 		const result = Biffer.unpack(format, this.#buffer, this.#pos);
 
-		this.#pos += Biffer.#calc(format);
+		this.#pos += Biffer.calc(format);
 
 		return result;
 	}
@@ -346,5 +345,6 @@ class Biffer {
 }
 
 Object.freeze(Biffer.dictSize);
+
 
 export default Biffer;
