@@ -29,7 +29,7 @@ if(isOutputHades) {
 /**
  * #### Biffer
  * - An easy wrapper for NodeJS Buffer
- * @version 1.2.0-2022.02.04.02
+ * @version 1.2.1-2022.03.02.01
  * @class
  */
 class Biffer {
@@ -248,7 +248,7 @@ class Biffer {
 
 
 		this.#length = this.useFD ?
-			fstatSync(raw).size :
+			fstatSync(this.#target).size :
 			this.#target.length;
 	}
 
