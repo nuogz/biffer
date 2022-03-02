@@ -29,7 +29,7 @@ if(isOutputHades) {
 /**
  * #### Biffer
  * - An easy wrapper for NodeJS Buffer
- * @version 1.2.1-2022.03.02.01
+ * @version 1.2.2-2022.03.02.02
  * @class
  */
 class Biffer {
@@ -356,7 +356,7 @@ class Biffer {
 				const offsetTemp = buffer.indexOf(bufferData);
 
 				if(offsetTemp > -1) {
-					offset = pos + offsetTemp - this.pos;
+					offset = pos + offsetTemp;
 
 					break;
 				}
