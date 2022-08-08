@@ -1,11 +1,19 @@
 {
 	"name": "@nuogz/biffer",
-	"version": "1.2.3",
+	"version": "2.0.0",
 	"description": "An easy wrapper for NodeJS Buffer",
 	"author": "Nuogz",
 	"license": "LGPL-3.0-or-later",
-	"main": "index.js",
+	"main": "./index.js",
 	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "github:nuogz/biffer"
+	},
+	"files": [
+		"index.js",
+		"locale/**"
+	],
 	"engines": {
 		"node": ">=14.18.1"
 	},

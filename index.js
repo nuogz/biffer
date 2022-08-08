@@ -5,34 +5,29 @@ import { fileURLToPath } from 'url';
 import I18N from 'i18next';
 
 
+
 export const dirPackage = dirname(fileURLToPath(import.meta.url));
 
 
-const isOutputHades = (process.env.OUTPUT_FORMAT ?? '').split(';')[0]?.toLowerCase() == 'hades';
-const segmentsDir = isOutputHades ? ['locale', 'hades'] : ['locale'];
-const localeOutput = process.env.OUTPUT_LOCALE ?? 'en';
+const useFormatHades = (process.env.OUTPUT_FORMAT ?? '').split(';').filter(s => s).map(s => s.trim().toLowerCase()).includes('hades');
+const segmentsDirLocale = useFormatHades ? ['locale', 'hades'] : ['locale'];
+const language = process.env.OUTPUT_LOCALE ?? 'en';
 
 await I18N.init({
-	lng: localeOutput,
+	lng: language,
 	resources: {
-		en: JSON.parse(readFileSync(resolve(dirPackage, ...segmentsDir, 'en.json'))),
-		zh: JSON.parse(readFileSync(resolve(dirPackage, ...segmentsDir, 'zh.json')))
+		en: JSON.parse(readFileSync(resolve(dirPackage, ...segmentsDirLocale, 'en.json'))),
+		zh: JSON.parse(readFileSync(resolve(dirPackage, ...segmentsDirLocale, 'zh.json')))
 	},
 });
 
-if(isOutputHades) {
+if(useFormatHades) {
 	I18N.services.formatter.add('hadesValue', value => `~{${value}}`);
 	I18N.services.formatter.add('hadesTerm', value => `~[${value}]`);
 }
 
 
-/**
- * #### Biffer
- * - An easy wrapper for NodeJS Buffer
- * @version 1.2.2-2022.03.02.02
- * @class
- */
-class Biffer {
+export default class Biffer {
 	/**
 	 * sizes of format char
 	 */
@@ -406,6 +401,3 @@ class Biffer {
 }
 
 Object.freeze(Biffer.dictSize);
-
-
-export default Biffer;
