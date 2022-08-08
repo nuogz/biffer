@@ -1,7 +1,7 @@
 {
 	"name": "@nuogz/biffer",
 	"version": "2.0.1",
-	"description": "An easy wrapper for NodeJS Buffer",
+	"description": "unpack binary data library based on NodeJS Buffer",
 	"author": "Nuogz",
 	"license": "LGPL-3.0-or-later",
 	"main": "./index.js",
