@@ -15,17 +15,6 @@
 			"args": [
 				"${workspaceRoot}"
 			]
-		},
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Test Local",
-			"console": "integratedTerminal",
-			"runtimeExecutable": "node.exe",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"program": "${workspaceFolder}/test/local.js"
 		}
 	]
 }

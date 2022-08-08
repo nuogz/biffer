@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@nuogz/i18n': ^1.0.1
   eslint: ^8.21.0
-  i18next: ^21.8.16
 
 dependencies:
-  i18next: 21.8.16
+  '@nuogz/i18n': 1.0.1
 
 devDependencies:
   eslint: 8.21.0
@@ -75,6 +75,13 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
     dev: true
+
+  /@nuogz/i18n/1.0.1:
+    resolution: {integrity: sha512-p8eGiz1q1mxbn3KSi6XVWq+OQaedh04146Cq6WSI64vIYVLnIZ91R/Gm5H/HyLs9qhCD5IcFo3O8b33cv3qrMw==}
+    engines: {node: '>=14.18.1'}
+    dependencies:
+      i18next: 21.8.16
+    dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.0:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}

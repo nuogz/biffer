@@ -1,30 +1,12 @@
-import { fstatSync, openSync, readFileSync, readSync } from 'fs';
-import { dirname, resolve } from 'path';
+import { fstatSync, openSync, readSync } from 'fs';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-import I18N from 'i18next';
+import initI18N from '@nuogz/i18n';
 
 
 
-export const dirPackage = dirname(fileURLToPath(import.meta.url));
-
-
-const useFormatHades = (process.env.OUTPUT_FORMAT ?? '').split(';').filter(s => s).map(s => s.trim().toLowerCase()).includes('hades');
-const segmentsDirLocale = useFormatHades ? ['locale', 'hades'] : ['locale'];
-const language = process.env.OUTPUT_LOCALE ?? 'en';
-
-await I18N.init({
-	lng: language,
-	resources: {
-		en: JSON.parse(readFileSync(resolve(dirPackage, ...segmentsDirLocale, 'en.json'))),
-		zh: JSON.parse(readFileSync(resolve(dirPackage, ...segmentsDirLocale, 'zh.json')))
-	},
-});
-
-if(useFormatHades) {
-	I18N.services.formatter.add('hadesValue', value => `~{${value}}`);
-	I18N.services.formatter.add('hadesTerm', value => `~[${value}]`);
-}
+const I18N = await initI18N(dirname(fileURLToPath(import.meta.url)));
 
 
 export default class Biffer {

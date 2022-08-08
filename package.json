@@ -1,6 +1,6 @@
 {
 	"name": "@nuogz/biffer",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "An easy wrapper for NodeJS Buffer",
 	"author": "Nuogz",
 	"license": "LGPL-3.0-or-later",
@@ -21,6 +21,6 @@
 		"eslint": "^8.21.0"
 	},
 	"dependencies": {
-		"i18next": "^21.8.16"
+		"@nuogz/i18n": "^1.0.1"
 	}
 }
