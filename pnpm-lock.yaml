@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@nuogz/i18n': ^1.0.1
+  '@nuogz/i18n': ^1.0.2
   eslint: ^8.21.0
 
 dependencies:
-  '@nuogz/i18n': 1.0.1
+  '@nuogz/i18n': 1.0.2
 
 devDependencies:
   eslint: 8.21.0
@@ -76,11 +76,11 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@nuogz/i18n/1.0.1:
-    resolution: {integrity: sha512-p8eGiz1q1mxbn3KSi6XVWq+OQaedh04146Cq6WSI64vIYVLnIZ91R/Gm5H/HyLs9qhCD5IcFo3O8b33cv3qrMw==}
+  /@nuogz/i18n/1.0.2:
+    resolution: {integrity: sha512-m+n7NKyKMyU87CuHavR0gwDQRExUcqg6JM9d96yNDCZaZ6T3PZ+76FgW1Tz1mZG9Dx49bm4mLNRUZ+TnSR594w==}
     engines: {node: '>=14.18.1'}
     dependencies:
-      i18next: 21.8.16
+      i18next: 21.9.0
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.0:
@@ -450,8 +450,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /i18next/21.8.16:
-    resolution: {integrity: sha512-acJLCk38YMfEPjBR/1vS13SFY7rBQLs9E5m1tSRnWc9UW3f+SZszgH+NP1fZRA1+O+CdG2eLGGmuUMJW52EwzQ==}
+  /i18next/21.9.0:
+    resolution: {integrity: sha512-B+6/yd7rCpJidyPuBaEApUECx7G8Ai6+tqYhrChsY4MmQqJhG7qJ4eT6Lm1OnRhieVelEtfxh4aAQktdNVZtDA==}
     dependencies:
       '@babel/runtime': 7.18.9
     dev: false
