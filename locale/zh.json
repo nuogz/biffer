@@ -1,6 +1,6 @@
 {
 	"translation": {
-		"invalidFormatChar": "无效的格式符: {{v}}",
-		"invalidParam": "无效的参数: {{v}}"
+		"invalidFormatChar": "无效格式符：{{v}}",
+		"invalidParam": "无效参数：{{v}}"
 	}
 }
