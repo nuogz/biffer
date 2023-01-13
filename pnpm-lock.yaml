@@ -1,14 +1,16 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@nuogz/i18n': ^1.2.2
+  '@nuogz/i18n': ^1.3.1
   eslint: ^8.31.0
+  typescript: ^4.9.4
 
 dependencies:
-  '@nuogz/i18n': 1.2.2
+  '@nuogz/i18n': 1.3.1
 
 devDependencies:
   eslint: 8.31.0
+  typescript: 4.9.4
 
 packages:
 
@@ -77,24 +79,24 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@nuogz/i18n/1.2.2:
-    resolution: {integrity: sha512-yWp5VlEy9NOvMhhz3A1ojn6Sa3VR2mfTYBEYwgYQHnfnQcnM7I8tJXsDsklLY2Ep3aTrWB6Cd/0Ua0Yovc3Npw==}
+  /@nuogz/i18n/1.3.1:
+    resolution: {integrity: sha512-fvMA1Lob3aXnMkfFRL4KiNPFzVLYmP/Mb4A1KwpOGCNOPdpybb6c0yPquowC/606T14Y2wWL2Z6wpOzzFcEzRg==}
     engines: {node: '>=14.18.1'}
     dependencies:
-      '@nuogz/utility': 1.4.1
+      '@nuogz/utility': 1.5.1
       i18next: 21.10.0
     dev: false
 
-  /@nuogz/json-bigint/1.0.0:
-    resolution: {integrity: sha512-QNFiqkLWkitdAAE28hNTARS+jeG8D0/gDnXlHJN5mObUYlJS6rCyzylcwJUDoSt3SYUiz0MfruqqkZ1nP9h4xw==}
+  /@nuogz/json-bigint/1.0.7:
+    resolution: {integrity: sha512-fgBWalk10nvhnj9HArasSzlOZuaQxoAa4RBnIBjpMTo1hs5sxOoBIA5horBxMhlQJ4ZQiatBAcnZyukWfF4zUA==}
     engines: {node: '>=14.18.1'}
     dev: false
 
-  /@nuogz/utility/1.4.1:
-    resolution: {integrity: sha512-KqTCDytO5PCorgoYDtJSVo+Z89TxdVnaOB7ZKGAZbuEA+FKL0Ytww4h8dKyeXZhfH3UN+YJvjG0+Ly82TLsy1w==}
+  /@nuogz/utility/1.5.1:
+    resolution: {integrity: sha512-bpwCjoZwxjyL0gaTfnOZaKuhrO/MNumBVcLnbIW8KvU+UF9E94IhVBXC5DlMWgK+Ly1lO1FFEYOHXIKKyhG7+Q==}
     engines: {node: '>=14.18.1'}
     dependencies:
-      '@nuogz/json-bigint': 1.0.0
+      '@nuogz/json-bigint': 1.0.7
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:
@@ -571,8 +573,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /punycode/2.1.1:
-    resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
+  /punycode/2.2.0:
+    resolution: {integrity: sha512-LN6QV1IJ9ZhxWTNdktaPClrNfp8xdSAYS0Zk2ddX7XsXZAxckMHPCBcHRo0cTcEIgYPRiGEkmji3Idkh2yFtYw==}
     engines: {node: '>=6'}
     dev: true
 
@@ -659,10 +661,16 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /typescript/4.9.4:
+    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
+
   /uri-js/4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
-      punycode: 2.1.1
+      punycode: 2.2.0
     dev: true
 
   /which/2.0.2:

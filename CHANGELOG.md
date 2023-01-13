@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.2.0 - 2023.01.13 17
+* add declaration files
+* update `jsconfig.json`
+* bump up dependencies
+
+
 ## v2.1.1 - 2023.01.05 10
 * bump up dependencies regularly
 * fix changelog
