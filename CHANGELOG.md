@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v2.3.0 - 2023.01.16 11
+* fix unexcepted position moving when format count is `0`, like `0L`, `0c`
+* improve unpacking logic
+* improve comment
+* bump up dependencies
+
+
 ## v2.2.0 - 2023.01.13 17
 * add declaration files
 * update `jsconfig.json`

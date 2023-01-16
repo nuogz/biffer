@@ -3,8 +3,8 @@ export default class Biffer {
      * sizes of format char
      */
     static dictSize: {
-        s: number;
         x: number;
+        s: number;
         c: number;
         b: number;
         B: number;
@@ -30,9 +30,9 @@ export default class Biffer {
      * @param {Buffer} buffer
      * @param {number} [start=0]
      * @param {string} [locale]
-     * @returns {Array<number|string|bigint>}
+     * @returns {[Array<number|string|bigint>, number]}
      */
-    static unpack(format: string, buffer: Buffer, start?: number, locale?: string): Array<number | string | bigint>;
+    static unpack(format: string, buffer: Buffer, start?: number, locale?: string): [Array<number | string | bigint>, number];
     /**
      *
      * @param {string} format

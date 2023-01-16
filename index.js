@@ -9,9 +9,9 @@ export default class Biffer {
 	 * sizes of format char
 	 */
 	static dictSize = {
-		s: 1, // vary str
+		x: 1, // padding
 
-		x: 1, // pad
+		s: 1, // varying string
 		c: 1, // char
 
 		b: 1, // signed char
@@ -63,63 +63,64 @@ export default class Biffer {
 	 * @param {Buffer} buffer
 	 * @param {number} [start=0]
 	 * @param {string} [locale]
-	 * @returns {Array<number|string|bigint>}
+	 * @returns {[Array<number|string|bigint>, number]}
 	 */
 	static unpack(format, buffer, start = 0, locale) {
+		const startFirst = start;
+
 		const charList = format.match(/(^[<>])|\d*[a-zA-Z]/g);
 
 		const [endian, matchEndian] = Biffer.#parseEndian(charList);
 
 		if(matchEndian) { charList.shift(); }
 
-		const result = [];
+		const dataRead = [];
 		charList.forEach(charRaw => {
-			const [char, count, size] = Biffer.#parseChar(charRaw);
+			const [charType, count, size] = Biffer.#parseChar(charRaw);
 
-			if(char == 's') {
-				result.push(
+			// varying string
+			if(charType == 's') {
+				dataRead.push(
 					buffer.toString('utf8', start, start + count)
 				);
-
-				start += count;
 			}
-			else if(char == 'c') {
+			// char
+			else if(charType == 'c') {
 				let remain = count;
 
 				while(remain-- > 0) {
-					result.push(
+					dataRead.push(
 						String.fromCharCode(buffer[start])
 					);
 				}
-
-				start += size * count;
 			}
-			else if(/[bhilq]/i.test(char)) {
-				const signed = /[bhilq]/.test(char) ? '' : 'U';
+			// integer
+			else if(/[bhilq]/i.test(charType)) {
+				const signed = /[bhilq]/.test(charType) ? '' : 'U';
 				const big = size > 4 ? 'Big' : '';
 				const sizeBytes = size * 8;
 				const markEndian = size > 1 ? endian : '';
 
-				let remain = 0;
 
-				do {
-					result.push(
-						buffer[`read${big}${signed}Int${sizeBytes}${markEndian}`](start + size * remain)
+				let remain = count;
+				while(remain > 0) {
+					dataRead.push(
+						buffer[`read${big}${signed}Int${sizeBytes}${markEndian}`](start + size * (count - remain))
 					);
-				}
-				while(++remain < count);
 
-				start += size * count;
+					remain--;
+				}
 			}
-			else if(char == 'x') {
-				start += size * count;
+			// padding
+			else if(charType != 'x') {
+				throw TypeError(T('invalidFormatChar', { v: charType }, locale));
 			}
-			else {
-				throw TypeError(T('invalidFormatChar', { v: char }, locale));
-			}
+
+
+			start += size * count;
 		});
 
-		return result;
+		return [dataRead, start - startFirst];
 	}
 
 	/**
@@ -248,11 +249,11 @@ export default class Biffer {
 			readSync(this.target, buffer = Buffer.alloc(sizeData), 0, sizeData, this.pos);
 		}
 
-		const result = Biffer.unpack(format, buffer, this.useFD ? 0 : this.pos, this.locale);
+		const [data, byteRead] = Biffer.unpack(format, buffer, this.useFD ? 0 : this.pos, this.locale);
 
-		this.#pos += sizeData;
+		this.#pos += byteRead;
 
-		return result;
+		return data;
 	}
 
 

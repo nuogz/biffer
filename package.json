@@ -1,6 +1,6 @@
 {
 	"name": "@nuogz/biffer",
-	"version": "2.2.0",
+	"version": "2.3.0",
 	"description": "unpack binary data library based on NodeJS Buffer",
 	"author": "Nuogz",
 	"license": "LGPL-3.0-or-later",
@@ -23,7 +23,7 @@
 		"emitDeclaration": "tsc ./index.js --declaration --emitDeclarationOnly --allowJs"
 	},
 	"devDependencies": {
-		"eslint": "^8.31.0",
+		"eslint": "^8.32.0",
 		"typescript": "^4.9.4"
 	},
 	"dependencies": {
