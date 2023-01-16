@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.4.0 - 2023.01.16 11
+* support reading `float` and `double` with format `f` or `d`
+* fix bug when reading char
+
+
 ## v2.3.0 - 2023.01.16 11
 * fix unexcepted position moving when format count is `0`, like `0L`, `0c`
 * improve unpacking logic

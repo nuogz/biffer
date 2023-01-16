@@ -76,7 +76,7 @@ export default class Biffer {
 
 		const dataRead = [];
 		charList.forEach(charRaw => {
-			const [charType, count, size] = Biffer.#parseChar(charRaw);
+			const [charType, count, sizeType] = Biffer.#parseChar(charRaw);
 
 			// varying string
 			if(charType == 's') {
@@ -88,27 +88,39 @@ export default class Biffer {
 			else if(charType == 'c') {
 				let remain = count;
 
-				while(remain-- > 0) {
+				while(remain > 0) {
 					dataRead.push(
-						String.fromCharCode(buffer[start])
+						String.fromCharCode(buffer[start + sizeType * (count - remain--)])
 					);
 				}
 			}
 			// integer
 			else if(/[bhilq]/i.test(charType)) {
 				const signed = /[bhilq]/.test(charType) ? '' : 'U';
-				const big = size > 4 ? 'Big' : '';
-				const sizeBytes = size * 8;
-				const markEndian = size > 1 ? endian : '';
+				const big = sizeType > 4 ? 'Big' : '';
+				const sizeBytes = sizeType * 8;
+				const markEndian = sizeType > 1 ? endian : '';
+
+
+				let remain = count;
+
+				while(remain > 0) {
+					dataRead.push(
+						buffer[`read${big}${signed}Int${sizeBytes}${markEndian}`](start + sizeType * (count - remain--))
+					);
+				}
+			}
+			// float, double
+			else if(/[fd]/.test(charType)) {
+				const type = 'f' == charType ? 'Float' : 'Double';
+				const markEndian = sizeType > 1 ? endian : '';
 
 
 				let remain = count;
 				while(remain > 0) {
 					dataRead.push(
-						buffer[`read${big}${signed}Int${sizeBytes}${markEndian}`](start + size * (count - remain))
+						buffer[`read${type}${markEndian}`](start + sizeType * (count - remain--))
 					);
-
-					remain--;
 				}
 			}
 			// padding
@@ -117,7 +129,7 @@ export default class Biffer {
 			}
 
 
-			start += size * count;
+			start += sizeType * count;
 		});
 
 		return [dataRead, start - startFirst];
