@@ -20,19 +20,23 @@ export default class Biffer {
         d: number;
     };
     /**
-     * @param {Array|Bufer} charList format chars
-     * @returns {string} `LE` or `BE`
+     * @param {string[]} chars format chars
+     * @returns {['LE' | 'BE', boolean]} `LE` or `BE`
      */
-    static "__#1@#parseEndian"(charList: any[] | Bufer): string;
-    static "__#1@#parseChar"(count_char: any): any[];
+    static "__#1@#parseEndian"(chars: string[]): ['LE' | 'BE', boolean];
+    /**
+     * @param {string} count_char
+     * @returns {[string, number, number]}
+     */
+    static "__#1@#parseChar"(count_char: string): [string, number, number];
     /**
      * @param {string} format
      * @param {Buffer} buffer
      * @param {number} [start=0]
      * @param {string} [locale]
-     * @returns {[Array<number|string|bigint>, number]}
+     * @returns {[(number|bigint|string)[], number]}
      */
-    static unpack(format: string, buffer: Buffer, start?: number, locale?: string): [Array<number | string | bigint>, number];
+    static unpack(format: string, buffer: Buffer, start?: number, locale?: string): [(number | bigint | string)[], number];
     /**
      *
      * @param {string} format
@@ -60,15 +64,15 @@ export default class Biffer {
      * @type {string}
      */
     locale: string;
-    TT: (key: any, options: any) => import("i18next").TFunctionDetailedResult<object>;
+    TT: (key: import("i18next").TFunctionKeys, options: import("i18next").TOptions<import("i18next").StringMap>) => import("i18next").TFunctionDetailedResult<object>;
     /**
      * Unpack data according format string
      * - `<` small endian (ONLY at the first, default endian if not set)
      * - `>` big endian (ONLY at the first)
      * @param {string} format
-     * @returns {Array<number|string|bigint>}
+     * @returns {(number|bigint|string)[]}
      */
-    unpack(format: string): Array<number | string | bigint>;
+    unpack(format: string): (number | bigint | string)[];
     /**
      * Current position
      * @returns {number}

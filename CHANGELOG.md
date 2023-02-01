@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.4.1 - 2023.02.01 11
+* improve `d.ts`
+* bump up dependencies
 * fix `.npmrc` to hoist `i18next` to emit `d.ts` correctly
 * improve script `emitDeclaration` to preserve symlinks in `d.ts`
 

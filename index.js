@@ -34,11 +34,11 @@ export default class Biffer {
 	};
 
 	/**
-	 * @param {Array|Bufer} charList format chars
-	 * @returns {string} `LE` or `BE`
+	 * @param {string[]} chars format chars
+	 * @returns {['LE' | 'BE', boolean]} `LE` or `BE`
 	 */
-	static #parseEndian(charList) {
-		const char = charList[0];
+	static #parseEndian(chars) {
+		const char = chars[0];
 
 		return [
 			char == '>' ? 'BE' : 'LE',
@@ -46,6 +46,10 @@ export default class Biffer {
 		];
 	}
 
+	/**
+	 * @param {string} count_char
+	 * @returns {[string, number, number]}
+	 */
 	static #parseChar(count_char) {
 		let [count, char] = count_char.split(/(?=[A-Za-z])/);
 
@@ -63,19 +67,19 @@ export default class Biffer {
 	 * @param {Buffer} buffer
 	 * @param {number} [start=0]
 	 * @param {string} [locale]
-	 * @returns {[Array<number|string|bigint>, number]}
+	 * @returns {[(number|bigint|string)[], number]}
 	 */
 	static unpack(format, buffer, start = 0, locale) {
 		const startFirst = start;
 
-		const charList = format.match(/(^[<>])|\d*[a-zA-Z]/g);
+		const chars = format.match(/(^[<>])|\d*[a-zA-Z]/g);
 
-		const [endian, matchEndian] = Biffer.#parseEndian(charList);
+		const [endian, isMatchEndian] = Biffer.#parseEndian(chars);
 
-		if(matchEndian) { charList.shift(); }
+		if(isMatchEndian) { chars.shift(); }
 
 		const dataRead = [];
-		charList.forEach(charRaw => {
+		chars.forEach(charRaw => {
 			const [charType, count, sizeType] = Biffer.#parseChar(charRaw);
 
 			// varying string
@@ -142,15 +146,15 @@ export default class Biffer {
 	 * @returns {number}
 	 */
 	static calc(format, locale) {
-		const charList = format.match(/(^[<>])|\d*[a-zA-Z]/g);
+		const chars = format.match(/(^[<>])|\d*[a-zA-Z]/g);
 
-		const [, matchEndian] = Biffer.#parseEndian(charList);
+		const [, isMatchEndian] = Biffer.#parseEndian(chars);
 
-		if(matchEndian) { charList.shift(); }
+		if(isMatchEndian) { chars.shift(); }
 
 		let length = 0;
 
-		charList.forEach(charRaw => {
+		chars.forEach(charRaw => {
 			const [char, count] = Biffer.#parseChar(charRaw);
 
 			const len = Biffer.dictSize[char];
@@ -251,7 +255,7 @@ export default class Biffer {
 	 * - `<` small endian (ONLY at the first, default endian if not set)
 	 * - `>` big endian (ONLY at the first)
 	 * @param {string} format
-	 * @returns {Array<number|string|bigint>}
+	 * @returns {(number|bigint|string)[]}
 	 */
 	unpack(format) {
 		const sizeData = Biffer.calc(format, this.locale);
