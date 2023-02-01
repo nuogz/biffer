@@ -20,7 +20,7 @@
 		"node": ">=14.18.1"
 	},
 	"scripts": {
-		"emitDeclaration": "tsc ./index.js --declaration --emitDeclarationOnly --allowJs"
+		"emitDeclaration": "tsc ./index.js --declaration --emitDeclarationOnly --allowJs --preserveSymlinks"
 	},
 	"devDependencies": {
 		"eslint": "^8.33.0",

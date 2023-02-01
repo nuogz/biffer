@@ -1,5 +1,9 @@
 # CHANGELOG
 
+* fix `.npmrc` to hoist `i18next` to emit `d.ts` correctly
+* improve script `emitDeclaration` to preserve symlinks in `d.ts`
+
+
 ## v2.4.0 - 2023.01.16 11
 * support reading `float` and `double` with format `f` or `d`
 * fix bug when reading char
