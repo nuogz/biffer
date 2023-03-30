@@ -1,6 +1,14 @@
 import { fstatSync, openSync, readSync } from 'fs';
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
 
-import { T, TT } from './lib/i18n.js';
+import { loadI18NResource, TT } from '@nuogz/i18n';
+
+
+
+loadI18NResource('@nuogz/biffer', resolve(dirname(fileURLToPath(import.meta.url)), 'locale'));
+
+const T = TT('@nuogz/biffer');
 
 
 
@@ -66,10 +74,9 @@ export default class Biffer {
 	 * @param {string} format
 	 * @param {Buffer} buffer
 	 * @param {number} [start=0]
-	 * @param {string} [locale]
 	 * @returns {[(number|bigint|string)[], number]}
 	 */
-	static unpack(format, buffer, start = 0, locale) {
+	static unpack(format, buffer, start = 0) {
 		const startFirst = start;
 
 		const chars = format.match(/(^[<>])|\d*[a-zA-Z]/g);
@@ -129,7 +136,7 @@ export default class Biffer {
 			}
 			// padding
 			else if(charType != 'x') {
-				throw TypeError(T('invalidFormatChar', { v: charType }, locale));
+				throw TypeError(T('invalidFormatChar', { value: charType }));
 			}
 
 
@@ -142,10 +149,9 @@ export default class Biffer {
 	/**
 	 *
 	 * @param {string} format
-	 * @param {string} [locale]
 	 * @returns {number}
 	 */
-	static calc(format, locale) {
+	static calc(format) {
 		const chars = format.match(/(^[<>])|\d*[a-zA-Z]/g);
 
 		const [, isMatchEndian] = Biffer.#parseEndian(chars);
@@ -160,7 +166,7 @@ export default class Biffer {
 			const len = Biffer.dictSize[char];
 
 			if(!len) {
-				throw TypeError(T('invalidFormatChar', { v: char }, locale));
+				throw TypeError(T('invalidFormatChar', { value: char }));
 			}
 			else {
 				length += len * (~~count || 4);
@@ -207,23 +213,12 @@ export default class Biffer {
 	get useFD() { return this.#useFD; }
 
 
-	/**
-	 * logger locale
-	 * @type {string}
-	 */
-	locale;
-
-	TT;
-
 
 	/**
 	 * An easy wrapper for NodeJS Buffer
 	 * @param {Buffer|string|number} raw `buffer` or `file path`
-	 * @param {string} [locale]
 	 */
-	constructor(raw, locale) {
-		this.locale = locale;
-		this.TT = TT(this.locale);
+	constructor(raw) {
 
 		if(raw instanceof Buffer) {
 			this.#target = raw;
@@ -241,7 +236,7 @@ export default class Biffer {
 			this.path = raw;
 		}
 		else {
-			throw TypeError(this.TT('invalidParam', { v: raw }));
+			throw TypeError(T('invalidConstructorParam', { value: raw }));
 		}
 
 
@@ -286,7 +281,7 @@ export default class Biffer {
 	 * @returns {number}
 	 */
 	seek(position) {
-		if(typeof position != 'number') { throw TypeError(this.TT('invalidParam', { v: position })); }
+		if(typeof position != 'number') { throw TypeError(T('invalidSeekParam', { value: position })); }
 
 		return this.#pos = position;
 	}
@@ -296,7 +291,7 @@ export default class Biffer {
 	 * @returns {number}
 	 */
 	skip(offset) {
-		if(typeof offset != 'number') { throw TypeError(this.TT('invalidParam', { v: offset })); }
+		if(typeof offset != 'number') { throw TypeError(T('invalidSkipParam', { value: offset })); }
 
 		return this.#pos += offset;
 	}
@@ -307,7 +302,7 @@ export default class Biffer {
 	 * @returns {Buffer}
 	 */
 	slice(size) {
-		if(typeof size != 'number') { throw TypeError(this.TT('invalidParam', { v: size })); }
+		if(typeof size != 'number') { throw TypeError(T('invalidSliceParam', { value: size })); }
 
 		const end = this.pos + size;
 

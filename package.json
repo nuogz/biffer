@@ -1,32 +1,33 @@
 {
 	"name": "@nuogz/biffer",
-	"version": "2.4.1",
-	"description": "unpack binary data library based on NodeJS Buffer",
+	"version": "2.5.0",
+	"description": "unpack binary data library based on Node.js Buffer",
 	"author": "Nuogz",
 	"license": "LGPL-3.0-or-later",
-	"main": "./index.js",
-	"type": "module",
 	"repository": {
 		"type": "git",
 		"url": "github:nuogz/biffer"
 	},
-	"files": [
-		"index.js",
-		"lib/**",
-		"locale/**",
-		"**/*.d.ts"
-	],
+	"type": "module",
+	"typesSource": [],
 	"engines": {
 		"node": ">=14.18.1"
 	},
+	"sideEffects": false,
+	"main": "./index.js",
+	"files": [
+		"index.js",
+		"locale/**",
+		"**/*.d.ts"
+	],
 	"scripts": {
-		"emitDeclaration": "tsc ./index.js --declaration --emitDeclarationOnly --allowJs --preserveSymlinks"
+		"emitDeclaration": "tsc ./index.js --declaration --emitDeclarationOnly --allowJs"
 	},
 	"devDependencies": {
-		"eslint": "^8.33.0",
+		"eslint": "^8.36.0",
 		"typescript": "^4.9.5"
 	},
 	"dependencies": {
-		"@nuogz/i18n": "^1.3.2"
+		"@nuogz/i18n": "^3.0.0"
 	}
 }

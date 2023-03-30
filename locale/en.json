@@ -1,6 +1,12 @@
 {
-	"translation": {
-		"invalidFormatChar": "invalid format char {{v}}",
-		"invalidParam": "invalid param {{v}}"
-	}
+	"invalidFormatChar@proto": "format char must be one of char [xscfdbhilqBHILQ], value: {{-value,valueType}}",
+	"invalidFormatChar@hades": "~[format char] must be one of char ~{xscfdbhilqBHILQ}, value: {{-value,valueType@hades}}",
+	"invalidConstructorParam@proto": "Biffer.constructor() argument must be one of type string, number or an instance of Buffer, value: {{-value,valueType}}",
+	"invalidConstructorParam@hades": "~[Biffer.constructor()] argument must be one of type ~{string}, ~{number} or an instance of ~{Buffer}, value: {{-value,valueType@hades}}",
+	"invalidSeekParam@proto": "Biffer.seek() argument must be tpye number, value: {{-value,valueType}}",
+	"invalidSeekParam@hades": "~[Biffer.seek()] argument must be tpye ~{number}, value: {{-value,valueType@hades}}",
+	"invalidSkipParam@proto": "Biffer.skip() argument must be tpye number, value: {{-value,valueType}}",
+	"invalidSkipParam@hades": "~[Biffer.skip()] argument must be tpye ~{number}, value: {{-value,valueType@hades}}",
+	"invalidSliceParam@proto": "Biffer.slice() argument must be tpye number, value: {{-value,valueType}}",
+	"invalidSliceParam@hades": "~[Biffer.slice()] argument must be tpye ~{number}, value: {{-value,valueType@hades}}"
 }

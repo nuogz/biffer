@@ -33,23 +33,20 @@ export default class Biffer {
      * @param {string} format
      * @param {Buffer} buffer
      * @param {number} [start=0]
-     * @param {string} [locale]
      * @returns {[(number|bigint|string)[], number]}
      */
-    static unpack(format: string, buffer: Buffer, start?: number, locale?: string): [(number | bigint | string)[], number];
+    static unpack(format: string, buffer: Buffer, start?: number): [(number | bigint | string)[], number];
     /**
      *
      * @param {string} format
-     * @param {string} [locale]
      * @returns {number}
      */
-    static calc(format: string, locale?: string): number;
+    static calc(format: string): number;
     /**
      * An easy wrapper for NodeJS Buffer
      * @param {Buffer|string|number} raw `buffer` or `file path`
-     * @param {string} [locale]
      */
-    constructor(raw: Buffer | string | number, locale?: string);
+    constructor(raw: Buffer | string | number);
     get target(): any;
     /**
      * File path (if pass file path when construct)
@@ -59,12 +56,6 @@ export default class Biffer {
     get pos(): number;
     get length(): number;
     get useFD(): number;
-    /**
-     * logger locale
-     * @type {string}
-     */
-    locale: string;
-    TT: (key: import("i18next").TFunctionKeys, options: import("i18next").TOptions<import("i18next").StringMap>) => import("i18next").TFunctionDetailedResult<object>;
     /**
      * Unpack data according format string
      * - `<` small endian (ONLY at the first, default endian if not set)

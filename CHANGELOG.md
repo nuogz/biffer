@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v2.5.0 - 2023.03.30 08
+* bump up `@nuogz/i18n` to `v3.x` and renew related code
+* renew locales and `d.ts`
+* bump up dependencies
+
+
 ## v2.4.1 - 2023.02.01 11
 * improve `d.ts`
 * bump up dependencies

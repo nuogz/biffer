@@ -1,6 +1,0 @@
-{
-	"translation": {
-		"invalidFormatChar": "invalid ~[format char] {{v,hadesValue}}",
-		"invalidParam": "invalid ~[param] {{v,hadesValue}}"
-	}
-}
