@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.5.2 - 2023.04.03 16
+* bump up `@nuogz/i18n` to `v3.1.0` and renew related code
+* renew locales and `d.ts`
+
+
 ## v2.5.1 - 2023.04.03 15
 * fix locales typos
 

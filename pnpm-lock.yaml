@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@nuogz/i18n':
-    specifier: ^3.0.1
-    version: 3.0.1
+    specifier: ^3.1.0
+    version: 3.1.0
 
 devDependencies:
   eslint:
@@ -100,8 +100,8 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@nuogz/i18n@3.0.1:
-    resolution: {integrity: sha512-PUQq517Al/nP/SbjaZ6iDgpM6pNmVGg5N1TRHKsLm+01kXu8Gkk9N7kdNa4hQsTpgD8VucXM6ijHGNuVLO1Q0w==}
+  /@nuogz/i18n@3.1.0:
+    resolution: {integrity: sha512-U+IJGWLnYDX8QBu4vdBpOmZHwwdybykU1/Sm8JFVRtsfw+87Zwtg4aGPyAvy5XXNqfHGuHKWWvJIgly3OuEyFA==}
     engines: {node: '>=14.18.1'}
     dependencies:
       i18next: 22.4.14
