@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v2.5.4 - 2023.04.07 09
+* improve locales
+
+
 ## v2.5.3 - 2023.04.03 16
 * fix locales typos
 

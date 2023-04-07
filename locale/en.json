@@ -1,12 +1,14 @@
 {
-	"invalidFormatChar@proto": "each character of 'format' argument must be one of [xscfdbhilqBHILQ], value: {{-value,valueType}}",
-	"invalidFormatChar@hades": "each character of ~[format] argument must be one of ~{xscfdbhilqBHILQ}, value {{-value,valueType@hades}}",
-	"invalidConstructorParam@proto": "'raw' argument must be one of type string, number or an instance of Buffer, value: {{-value,valueType}}",
-	"invalidConstructorParam@hades": "~[raw] argument must be one of type ~{string}, ~{number} or an instance of ~{Buffer}, value {{-value,valueType@hades}}",
-	"invalidSeekParam@proto": "'position' argument must be of type number, value: {{-value,valueType}}",
-	"invalidSeekParam@hades": "~[position] argument must be of type ~{number}, value {{-value,valueType@hades}}",
-	"invalidSkipParam@proto": "'offset' argument must be of type number, value: {{-value,valueType}}",
-	"invalidSkipParam@hades": "~[offset] argument must be of type ~{number}, value {{-value,valueType@hades}}",
-	"invalidSliceParam@proto": "'size' argument must be of type number, value: {{-value,valueType}}",
-	"invalidSliceParam@hades": "~[size] argument must be of type ~{number}, value {{-value,valueType@hades}}"
+	"ArgumentError": {
+		"invalidFormatChar@proto": "each character of 'format' argument must be one of [xscfdbhilqBHILQ], value: {{-value,valueType}}",
+		"invalidFormatChar@hades": "each character of ~[format] argument must be one of ~{xscfdbhilqBHILQ}, value {{-value,valueType@hades}}",
+		"invalidConstructorRaw@proto": "'raw' argument must be one of type string, number or an instance of Buffer, value: {{-value,valueType}}",
+		"invalidConstructorRaw@hades": "~[raw] argument must be one of type ~{string}, ~{number} or an instance of ~{Buffer}, value {{-value,valueType@hades}}",
+		"invalidSeekPosition@proto": "'position' argument must be of type number, value: {{-value,valueType}}",
+		"invalidSeekPosition@hades": "~[position] argument must be of type ~{number}, value {{-value,valueType@hades}}",
+		"invalidSkipOffset@proto": "'offset' argument must be of type number, value: {{-value,valueType}}",
+		"invalidSkipOffset@hades": "~[offset] argument must be of type ~{number}, value {{-value,valueType@hades}}",
+		"invalidSliceSize@proto": "'size' argument must be of type number, value: {{-value,valueType}}",
+		"invalidSliceSize@hades": "~[size] argument must be of type ~{number}, value {{-value,valueType@hades}}"
+	}
 }

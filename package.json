@@ -1,6 +1,6 @@
 {
 	"name": "@nuogz/biffer",
-	"version": "2.5.3",
+	"version": "2.5.4",
 	"description": "unpack binary data library based on Node.js Buffer",
 	"author": "Nuogz",
 	"license": "LGPL-3.0-or-later",
