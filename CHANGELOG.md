@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v2.6.0 - 2023.12.06 19
+* tweak enviroment
+* bump up dependencies
+
+
 ## v2.5.4 - 2023.04.07 09
 * improve locales
 
